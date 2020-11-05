@@ -19,7 +19,6 @@ var buttonB = document.getElementById("b");
 var buttonC = document.getElementById("c");
 var buttonD = document.getElementById("d");
 
-// Quiz question object
 var quizQuestions = [{
     question: "Albania is a:",
     choiceA: "State",
@@ -68,14 +67,14 @@ var timeLeft = 100;
 var timerInterval;
 var score = 0;
 var correct;
-var currentQuestion = quizQuestions[currentQuestionIndex];
+
 // This function cycles through the object array containing the quiz questions to generate the questions and answers.
 function generateQuizQuestion(){
     endgameDiv.style.display = "none";
     if (currentQuestionIndex === finalQuestionIndex){
         return showScore();
     } 
-    //var currentQuestion = quizQuestions[currentQuestionIndex];
+    var currentQuestion = quizQuestions[currentQuestionIndex];
     questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
     buttonA.innerHTML = currentQuestion.choiceA;
     buttonB.innerHTML = currentQuestion.choiceB;
@@ -177,7 +176,7 @@ function replayQuiz(){
     highscoreContainer.style.display = "none";
     endgameDiv.style.display = "none";
     startQuizDiv.style.display = "flex";
-    timeLeft = 76;
+    timeLeft = 100;
     score = 0;
     currentQuestionIndex = 0;
 }
@@ -188,16 +187,12 @@ function checkAnswer(answer){
 
     if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
         score++;
-        //document.getElementById(currentQuestion[currentQuestionIndex]).style.background = "#0f0"
-       // alert("That Is Correct!");
-       output.push ("Correct answer");
+        //alert("That Is Correct!");
         currentQuestionIndex++;
         generateQuizQuestion();
         //display in the results div that the answer is correct.
     }else if (answer !== correct && currentQuestionIndex !== finalQuestionIndex){
-       // alert("That Is Incorrect.")
-        //document.getElementById(currentQuestion[currentQuestionIndex]).style.background = "#f00"
-        output.push ("Wrong answer");
+        //alert("That Is Incorrect.")
         currentQuestionIndex++;
         timeLeft= timeLeft- 10
         generateQuizQuestion();
